@@ -43,10 +43,12 @@ export const useDrag = (
         //   y = roundTo(y, movementBox.y);
         // }
 
-        setPosition({
-          x: restrictRange(minX, maxX, x),
-          y: restrictRange(minY, maxY, y)
-        });
+        requestAnimationFrame(() =>
+          setPosition({
+            x: restrictRange(minX, maxX, x),
+            y: restrictRange(minY, maxY, y)
+          })
+        );
       };
 
       const onMouseMove = ({ clientX, clientY }) => onDrag(clientX, clientY);
