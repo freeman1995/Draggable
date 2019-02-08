@@ -3,16 +3,24 @@ import { useCallback, useEffect, useState } from "react";
 const restrictRange = (min = -Infinity, max = Infinity, value) =>
   Math.max(min, Math.min(value, max));
 
-export const useDrag = (defaultPosition, minX, minY, maxX, maxY) => {
+// const roundTo = (value, step = value) => value && value - (value % step);
+
+// TODO: fix movement box logic
+export const useDrag = (
+  defaultPosition,
+  minX,
+  minY,
+  maxX,
+  maxY
+  // movementBox
+) => {
   const [position, setPosition] = useState(defaultPosition);
   const [dragStartPosition, setDragStartPosition] = useState(null);
   const [isTouchInterface, setIsTouchInterface] = useState(false);
 
-  const onMouseDragStart = useCallback(
-    ({ clientX, clientY }) => setDragStartPosition({ x: clientX, y: clientY }),
-    []
-  );
-
+  const onMouseDragStart = useCallback(({ clientX, clientY }) => {
+    setDragStartPosition({ x: clientX, y: clientY });
+  }, []);
   const onTouchDragStart = useCallback(({ nativeEvent }) => {
     const { clientX, clientY } = nativeEvent.targetTouches[0];
 
@@ -27,8 +35,13 @@ export const useDrag = (defaultPosition, minX, minY, maxX, maxY) => {
       const onDrag = (clientX, clientY) => {
         const deltaX = clientX - dragStartPosition.x;
         const deltaY = clientY - dragStartPosition.y;
-        const x = position.x + deltaX;
-        const y = position.y + deltaY;
+        let x = position.x + deltaX;
+        let y = position.y + deltaY;
+
+        // if (movementBox) {
+        //   x = roundTo(x, movementBox.x);
+        //   y = roundTo(y, movementBox.y);
+        // }
 
         setPosition({
           x: restrictRange(minX, maxX, x),

@@ -3,8 +3,6 @@ import styled, { css } from "styled-components";
 
 import { useDrag } from "./useDrag";
 
-const roundTo = (value, step = value) => value && value - (value % step);
-
 const Draggable = ({
   defaultPosition = { x: 0, y: 0 },
   children,
@@ -23,12 +21,7 @@ const Draggable = ({
     position: { x, y },
     onMouseDragStart,
     onTouchDragStart
-  } = useDrag(defaultPosition, minX, minY, maxX, maxY);
-
-  if (movementBox) {
-    x = roundTo(x, movementBox.x);
-    y = roundTo(y, movementBox.y);
-  }
+  } = useDrag(defaultPosition, minX, minY, maxX, maxY, movementBox);
 
   return (
     <DraggableContainer
