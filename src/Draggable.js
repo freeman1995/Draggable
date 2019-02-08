@@ -5,9 +5,6 @@ import { useDrag } from "./useDrag";
 
 const roundTo = (value, step = value) => value && value - (value % step);
 
-const restrictRange = (min = -Infinity, max = Infinity, value) =>
-  Math.max(min, Math.min(value, max));
-
 const Draggable = ({
   defaultPosition = { x: 0, y: 0 },
   children,
@@ -26,7 +23,7 @@ const Draggable = ({
     position: { x, y },
     onMouseDragStart,
     onTouchDragStart
-  } = useDrag(defaultPosition);
+  } = useDrag(defaultPosition, minX, minY, maxX, maxY);
 
   if (movementBox) {
     x = roundTo(x, movementBox.x);
@@ -35,15 +32,15 @@ const Draggable = ({
 
   return (
     <DraggableContainer
-      className={className}
+      isDragging={isDragging}
+      x={x}
+      y={y}
       onMouseDown={onMouseDragStart}
       onTouchStart={onTouchDragStart}
-      isDragging={isDragging}
-      x={restrictRange(minX, maxX, x)}
-      y={restrictRange(minY, maxY, y)}
-      animateDragging={animateDragging}
       growShrinkBehavior={growShrinkBehavior}
+      animateDragging={animateDragging}
       baseZIndex={baseZIndex}
+      className={className}
     >
       {children}
     </DraggableContainer>
