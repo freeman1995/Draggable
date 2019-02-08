@@ -1,10 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 
-// TODO: tsx
-// TODO: fix movement box logic
-// TODO: maybe learn about differences between mouse event and touch event
-// TODO: use reqAnimFrame
-// TODO: compare to react-draggable
 export const useDrag = defaultPosition => {
   const [position, setPosition] = useState(defaultPosition);
   const [dragStartPosition, setDragStartPosition] = useState(null);
