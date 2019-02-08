@@ -5,12 +5,14 @@ export const useDrag = defaultPosition => {
   const [dragStartPosition, setDragStartPosition] = useState(null);
   const [isTouchInterface, setIsTouchInterface] = useState(false);
 
-  // TODO: Unite
   const onMouseDragStart = useCallback(
     ({ clientX, clientY }) => setDragStartPosition({ x: clientX, y: clientY }),
     []
   );
-  const onTouchDragStart = useCallback(({ clientX, clientY }) => {
+
+  const onTouchDragStart = useCallback(({ nativeEvent }) => {
+    const { clientX, clientY } = nativeEvent.targetTouches[0];
+
     setDragStartPosition({ x: clientX, y: clientY });
     setIsTouchInterface(true);
   }, []);
