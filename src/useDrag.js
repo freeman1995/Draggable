@@ -21,6 +21,7 @@ export const useDrag = (
   const onMouseDragStart = useCallback(({ clientX, clientY }) => {
     setDragStartPosition({ x: clientX, y: clientY });
   }, []);
+
   const onTouchDragStart = useCallback(({ nativeEvent }) => {
     const { clientX, clientY } = nativeEvent.targetTouches[0];
 
@@ -52,6 +53,7 @@ export const useDrag = (
       };
 
       const onMouseMove = ({ clientX, clientY }) => onDrag(clientX, clientY);
+
       const onTouchMove = e => {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -61,21 +63,17 @@ export const useDrag = (
         onDrag(clientX, clientY);
       };
 
-      const dragStartEventType = isTouchInterface ? "touchend" : "mouseup";
-      const dragEventType = isTouchInterface ? "touchmove" : "mousemove";
+      const dragStartEvent = isTouchInterface ? "touchend" : "mouseup";
+      const dragEvent = isTouchInterface ? "touchmove" : "mousemove";
       const dragEventHandler = isTouchInterface ? onTouchMove : onMouseMove;
 
       document.body.style.cursor = "move";
-      document.addEventListener(
-        dragStartEventType,
-        () => setDragStartPosition(null),
-        { once: true }
-      );
-      document.addEventListener(dragEventType, dragEventHandler);
+      document.addEventListener(dragStartEvent, () => setDragStartPosition(null), { once: true });
+      document.addEventListener(dragEvent, dragEventHandler);
 
       return () => {
         document.body.style.cursor = "initial";
-        document.removeEventListener(dragEventType, dragEventHandler);
+        document.removeEventListener(dragEvent, dragEventHandler);
       };
     },
     [dragStartPosition]

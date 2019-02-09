@@ -42,23 +42,20 @@ const Draggable = ({
 
 export default Draggable;
 
-const DraggableContainer = styled.div.attrs(
-  ({ x, y, isDragging, growShrinkBehavior }) => ({
-    style: {
-      transform: `
+const DraggableContainer = styled.div.attrs(({ x, y, isDragging, growShrinkBehavior }) => ({
+  style: {
+    transform: `
         translate(${x}px, ${y}px)
         scale(${isDragging && growShrinkBehavior ? 1.1 : 1})
       `
-    }
-  })
-)`
+  }
+}))`
   touch-action: none;
   user-select: none;
   cursor: move;
   position: absolute;
   transition: transform cubic-bezier(0.17, 0.67, 0.91, 1.45) 150ms;
-  z-index: ${({ isDragging, baseZIndex }) =>
-    isDragging ? baseZIndex + 2 : baseZIndex};
+  z-index: ${({ isDragging, baseZIndex }) => (isDragging ? baseZIndex + 2 : baseZIndex)};
 
   ${({ isDragging, animateDragging }) =>
     isDragging &&

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+// prettier-ignore
 const SettingsForm = ({
   onInputChange,
   animateDragging,
@@ -13,33 +14,13 @@ const SettingsForm = ({
   minY
 }) => (
   <Form>
-    <Field
-      name="animateDragging"
-      type="checkbox"
-      checked={animateDragging}
-      onChange={onInputChange}
-    />
-    <Field
-      name="growShrinkBehavior"
-      type="checkbox"
-      checked={growShrinkBehavior}
-      onChange={onInputChange}
-    />
+    <Field name="animateDragging" type="checkbox" checked={animateDragging} onChange={onInputChange} />
+    <Field name="growShrinkBehavior" type="checkbox" checked={growShrinkBehavior} onChange={onInputChange} />
 
     <hr />
 
-    <Field
-      name="movementBoxX"
-      type="number"
-      value={movementBoxX}
-      onChange={onInputChange}
-    />
-    <Field
-      name="movementBoxY"
-      type="number"
-      value={movementBoxY}
-      onChange={onInputChange}
-    />
+    <Field name="movementBoxX" type="number" value={movementBoxX} onChange={onInputChange} />
+    <Field name="movementBoxY" type="number" value={movementBoxY} onChange={onInputChange} />
 
     <hr />
 
@@ -62,13 +43,7 @@ const Form = styled.div`
 const Field = ({ name, type, value, checked, onChange }) => (
   <Label htmlFor={name}>
     {name}:&nbsp;
-    <input
-      name={name}
-      type={type}
-      value={value}
-      checked={checked}
-      onChange={onChange}
-    />
+    <input name={name} type={type} value={value} checked={checked} onChange={onChange} />
   </Label>
 );
 
