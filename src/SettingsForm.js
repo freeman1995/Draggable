@@ -19,10 +19,10 @@ const SettingsForm = ({
 
     <hr />
 
-    <Field name="movementBoxX" type="number" value={movementBoxX} onChange={onInputChange} />
-    <Field name="movementBoxY" type="number" value={movementBoxY} onChange={onInputChange} />
+    {/*<Field name="movementBoxX" type="number" value={movementBoxX} onChange={onInputChange} />*/}
+    {/*<Field name="movementBoxY" type="number" value={movementBoxY} onChange={onInputChange} />*/}
 
-    <hr />
+    {/*<hr />*/}
 
     <Field name="maxX" type="number" value={maxX} onChange={onInputChange} />
     <Field name="maxY" type="number" value={maxY} onChange={onInputChange} />
